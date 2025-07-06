@@ -1,6 +1,57 @@
-# React + TypeScript + Vite
+# Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautiful, responsive weather application built with React, TypeScript, Vite, and Tailwind CSS. Features automatic dark/light mode based on time of day and smooth weather animations.
+
+## Features
+
+- 🌤️ Real-time weather data from WeatherAPI
+- 🎨 Beautiful Lottie animations for different weather conditions
+- 🌙 Automatic dark mode during night hours (6 PM - 6 AM)
+- 📱 Fully responsive design
+- 📍 Location-based weather detection
+- 🎭 Bebas Neue font for modern typography
+
+## Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/AndreyPetkov03/weather-app2.git
+   cd weather-app2
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   - Copy `.env.example` to `.env`
+   - Get a free API key from [WeatherAPI](https://weatherapi.com/api)
+   - Replace `your_weather_api_key_here` with your actual API key in `.env`
+
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+## Environment Variables
+
+Create a `.env` file in the root directory with:
+
+```
+VITE_WEATHER_API_KEY=your_weather_api_key_here
+```
+
+## Technologies Used
+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS v4
+- Lottie Animations
+- WeatherAPI
+
+## Original Vite Template Info
 
 Currently, two official plugins are available:
 

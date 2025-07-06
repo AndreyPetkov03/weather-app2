@@ -62,7 +62,12 @@ function App() {
     setError('');
     
     try {
-      const apiKey = 'e66ec96d5f1247c6a48230953250507';
+      const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+      
+      if (!apiKey) {
+        throw new Error('Weather API key not configured');
+      }
+      
       const response = await fetch(
         `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&aqi=no`
       );
