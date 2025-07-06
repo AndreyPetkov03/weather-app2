@@ -21,12 +21,12 @@ function App() {
   // Location SVG Icon Component
   const LocationIcon = () => (
     <svg 
-      width="16" 
-      height="16" 
+      width="32" 
+      height="32" 
       viewBox="0 0 24 24" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
-      className="inline-block mr-2"
+      className="mx-auto mb-2"
     >
       <path 
         d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" 
@@ -113,23 +113,34 @@ function App() {
   }, []);
 
   const currentHour = new Date().getHours();
+  const isNight = currentHour < 6 || currentHour > 18;
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center p-4 sm:p-6 lg:p-8 overflow-hidden font-['Roboto']">
+    <div className={`min-h-screen w-full flex items-center justify-center p-4 sm:p-6 lg:p-8 overflow-hidden font-['Bebas_Neue'] ${
+      isNight 
+        ? 'bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900' 
+        : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+    }`}>
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
         {loading && (
           <div className="text-center px-4">
-            <div className="animate-spin rounded-full h-12 w-12 sm:h-14 sm:w-14 md:h-18 md:w-18 border-b-2 border-gray-600 mx-auto mb-4 sm:mb-5"></div>
-            <p className="text-gray-700 text-lg sm:text-xl md:text-2xl font-light">Getting your weather...</p>
+            <div className={`animate-spin rounded-full h-12 w-12 sm:h-14 sm:w-14 md:h-18 md:w-18 border-b-2 mx-auto mb-4 sm:mb-5 ${
+              isNight ? 'border-white' : 'border-gray-600'
+            }`}></div>
+            <p className={`text-lg sm:text-xl md:text-2xl ${
+              isNight ? 'text-gray-200' : 'text-gray-700'
+            }`}>Getting your weather...</p>
           </div>
         )}
 
         {error && (
           <div className="text-center px-4">
-            <p className="text-red-500 mb-4 sm:mb-5 text-base sm:text-lg md:text-xl font-light">{error}</p>
+            <p className={`mb-4 sm:mb-5 text-base sm:text-lg md:text-xl ${
+              isNight ? 'text-red-400' : 'text-red-500'
+            }`}>{error}</p>
             <button
               onClick={requestLocation}
-              className="px-6 py-3 sm:px-8 sm:py-3 md:px-10 md:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-base sm:text-lg font-medium"
+              className="px-6 py-3 sm:px-8 sm:py-3 md:px-10 md:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-base sm:text-lg"
             >
               Try Again
             </button>
@@ -137,11 +148,17 @@ function App() {
         )}
 
         {weather && !loading && (
-          <div className="text-center text-gray-800 px-4">
-            {/* City Name with Location Icon at top */}
-            <div className="flex items-center justify-center mb-8 sm:mb-10 md:mb-12">
-              <LocationIcon />
-              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-light text-gray-600">
+          <div className={`text-center px-4 ${
+            isNight ? 'text-gray-100' : 'text-gray-800'
+          }`}>
+            {/* Location Icon above city name */}
+            <div className="mb-8 sm:mb-10 md:mb-12">
+              <div className={isNight ? 'text-gray-300' : 'text-gray-600'}>
+                <LocationIcon />
+              </div>
+              <h1 className={`text-lg sm:text-xl md:text-2xl lg:text-2xl ${
+                isNight ? 'text-gray-300' : 'text-gray-600'
+              }`}>
                 {weather.name}
               </h1>
             </div>
@@ -157,13 +174,12 @@ function App() {
               </div>
             </div>
 
-            {/* Temperature at bottom */}
-            <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-thin mb-2 sm:mb-3 text-gray-800">
+            {/* Temperature - made smaller and removed description */}
+            <div className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl ${
+              isNight ? 'text-gray-100' : 'text-gray-800'
+            }`}>
               {Math.round(weather.main.temp)}°
             </div>
-            <p className="text-gray-500 text-base sm:text-lg md:text-xl lg:text-2xl capitalize px-2 font-light">
-              {weather.weather[0].description}
-            </p>
           </div>
         )}
       </div>
