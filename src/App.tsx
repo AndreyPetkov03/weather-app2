@@ -179,7 +179,7 @@ function App() {
               </div>
             </div>
 
-            {/* Temperature - made smaller and removed description */}
+            {/* Temperature */}
             <div className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl ${
               isNight ? 'text-gray-100' : 'text-gray-800'
             }`}>
